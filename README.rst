@@ -235,3 +235,27 @@ A simple example template is shown below:
 
 We provide several examples we use at `Inesonic <https://https://inesonic.com>`
 in the assets/templates directory.
+
+
+Validating Page Nonces
+======================
+To validate a page nonce, force the WordPress filter
+"inesonic-filter-page-cancellation-survey" to be triggered from your child
+theme when the page is loaded.  The filter will return ``null`` if the page
+should be used or HTML page content giving a recommended message if the
+page should not be used.
+
+.. code-block:: php
+
+   $page_value = apply_filters(
+       'inesonic-filter-page-cancellation-survey',
+       null
+   );
+
+   if ($page_value !== null) {
+       echo $page_value;
+   } else {
+       // Render the page normally here.
+   }
+
+   
